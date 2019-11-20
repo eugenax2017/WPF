@@ -1,0 +1,17 @@
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\bin\Debug\netcoreapp3.0\WpfCalculator.exe
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\bin\Debug\netcoreapp3.0\WpfCalculator.deps.json
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\bin\Debug\netcoreapp3.0\WpfCalculator.runtimeconfig.json
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\bin\Debug\netcoreapp3.0\WpfCalculator.runtimeconfig.dev.json
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\bin\Debug\netcoreapp3.0\WpfCalculator.dll
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\bin\Debug\netcoreapp3.0\WpfCalculator.pdb
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\obj\Debug\netcoreapp3.0\MainWindow.g.cs
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\obj\Debug\netcoreapp3.0\App.g.cs
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\obj\Debug\netcoreapp3.0\WpfCalculator_MarkupCompile.cache
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\obj\Debug\netcoreapp3.0\WpfCalculator_MarkupCompile.lref
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\obj\Debug\netcoreapp3.0\MainWindow.baml
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\obj\Debug\netcoreapp3.0\WpfCalculator.g.resources
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\obj\Debug\netcoreapp3.0\WpfCalculator.AssemblyInfoInputs.cache
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\obj\Debug\netcoreapp3.0\WpfCalculator.AssemblyInfo.cs
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\obj\Debug\netcoreapp3.0\WpfCalculator.dll
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\obj\Debug\netcoreapp3.0\WpfCalculator.pdb
+C:\Users\formacio\Desktop\Evgenii\WPF\WpfCalculator\WpfCalculator\obj\Debug\netcoreapp3.0\WpfCalculator.csprojAssemblyReference.cache
