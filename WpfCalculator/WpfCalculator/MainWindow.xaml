@@ -17,8 +17,8 @@
         </Style>        
     </Window.Resources>    
     <StackPanel Orientation ="Vertical" Height="450">
-        <TextBox Text="0" FontFamily="Verdana" FontSize="28" TextAlignment="Right" BorderBrush="Pink" Height="34" Margin="5" HorizontalAlignment="Stretch" IsReadOnly="True"/>
-        <Grid Height="365">
+        <TextBox Name="Result" Text="0" FontFamily="Verdana" FontSize="28" TextAlignment="Right" BorderBrush="Pink" Height="34" Margin="5" HorizontalAlignment="Stretch" IsReadOnly="True"/>
+        <Grid Name="Grid" Height="365">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -51,8 +51,7 @@
             <Button Name="Button17" Grid.Column="0" Grid.Row="4" Content="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />            
             <Button Name="Button19" Grid.Column="2" Grid.Row="4" Content="," HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             <Button Name="Button20" Grid.Column="3" Grid.Row="4" Content="=" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />            
-        </Grid>
-        
+        </Grid>      
 
     </StackPanel>
 </Window>
