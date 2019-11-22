@@ -37,24 +37,31 @@ namespace WpfCalculator
             public static string Var2 { get; set; }
             public static string Operation { get; set; }
             public static TypeOfButton Press_Btn { get; set; }
-
             public static void FillMemory(TextBox Result, string sign)
             {
                 if (String.IsNullOrEmpty(Memory.Operation) || Memory.Press_Btn == TypeOfButton.Equality)
                 {
                     Memory.Var1 = Result.Text;
-                    //Memory.Operation = sign;
+                    if (sign == "%")
+                    {
+                        Result.Text = Memory.CalculatePercent();
+                        return;
+                    }
+                    Memory.Var2 = "";
                 }
                 else
                 {
-                    if (Memory.Press_Btn != TypeOfButton.Operator) // Memory.Press_Btn == TypeOfButton.Digit
-                        Memory.Var2 = Result.Text;
-                    else 
-                    {                        
-                        if (Memory.Press_Btn != TypeOfButton.Digit) // Memory.Press_Btn == TypeOfButton.Operator
-                            Memory.Var2 = "";
-                    }                
-
+                    Memory.Var2 = Result.Text; // Memory.Press_Btn == TypeOfButton.Digit
+                    if (Memory.Press_Btn != TypeOfButton.Digit) // Memory.Press_Btn == TypeOfButton.Operator
+                       if (sign != "%") 
+                            Memory.Var2 = "";             
+                    if (sign == "%")
+                    {
+                        Result.Text = Memory.CalculatePercent();
+                        if (Memory.Press_Btn == TypeOfButton.Operator) 
+                            Memory.Var2 = Result.Text;
+                        return;
+                    }                            
                     if (!String.IsNullOrEmpty(Memory.Var1) && !String.IsNullOrEmpty(Memory.Var2))
                     {
                         Result.Text = Memory.Execute();
@@ -83,33 +90,35 @@ namespace WpfCalculator
                     return MultiplicateNumbers();   
                return "";
             }
-            
+            public static string CalculatePercent()
+            {
+                if (String.IsNullOrEmpty(Memory.Var2))
+                    return (decimal.Parse(Var1)/100).ToString();
+                return (decimal.Parse(Var1)* decimal.Parse(Var2)/100).ToString();
+            }
+
             public static string MultiplicateNumbers()
             {
-                return (double.Parse(Var1) * double.Parse(Var2)).ToString();
+                return (decimal.Parse(Var1) * decimal.Parse(Var2)).ToString();
             }
             public static string DeductionNumbers()
             {
-                return (double.Parse(Var1) - double.Parse(Var2)).ToString();
+                return (decimal.Parse(Var1) - decimal.Parse(Var2)).ToString();
             }
             public static string DevideNumbers()
             {
-                return (double.Parse(Var1) / double.Parse(Var2)).ToString();
+                return decimal.Parse(Var2) == 0 ? "0" : (decimal.Parse(Var1) / decimal.Parse(Var2)).ToString();
             }
             public static string AddNumbers()
             {
-                return (double.Parse(Var1) + double.Parse(Var2)).ToString();
+                return (decimal.Parse(Var1) + decimal.Parse(Var2)).ToString();
             }
         }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (var item in Grid.Children)
-            {
-                if (item is Button)
-                {
-                    ((Button)item).Click += Button_Click;
-                }
-            }
+                if (item is Button)               
+                    ((Button)item).Click += Button_Click;  
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -137,19 +146,27 @@ namespace WpfCalculator
                 case "6":
                 case "7":
                 case "8":
-                case "9":
+                case "9":                
                     if (Memory.Press_Btn == TypeOfButton.Equality)
                         Memory.Clear();                                               
-                    if (current_result == "0")
-                    {
-                        Result.Text = current_button;
-                    }
+                    if (current_result == "0")                   
+                        Result.Text = current_button;                   
                     else if (current_result == "-0")
                         Result.Text = "-" + current_button;
-                    else  
+                    else      
+                        Result.Text += current_button;       
+                    Memory.Press_Btn = TypeOfButton.Digit;
+                    break;
+                case ",":
+                    if (Memory.Press_Btn == TypeOfButton.Equality)
                     {
-                        Result.Text += current_button;
-                    }
+                        Memory.Clear();
+                        Result.Text = "0,";
+                    }                        
+                    if (Memory.Press_Btn == TypeOfButton.Operator)                   
+                        Result.Text = "0,";                  
+                    else if (!Result.Text.Contains(","))                                       
+                        Result.Text += current_button;                                     
                     Memory.Press_Btn = TypeOfButton.Digit;
                     break;
                 case "+":
@@ -167,10 +184,11 @@ namespace WpfCalculator
                 case "=":
                     if (!String.IsNullOrEmpty(Memory.Var1) && !String.IsNullOrEmpty(Memory.Operation))
                     {
-                        if (Memory.Press_Btn == TypeOfButton.Digit)
+                        if (Memory.Press_Btn == TypeOfButton.Digit || String.IsNullOrEmpty(Memory.Var2))
                             Memory.Var2 = Result.Text;
+
                         Result.Text = Memory.Execute();
-                    }
+                    }                    
                     Memory.Var1 = Result.Text;
                     Memory.Press_Btn = TypeOfButton.Equality;
                     break;
@@ -179,13 +197,16 @@ namespace WpfCalculator
                         Result.Text = Result.Text.Substring(1);
                     else
                         Result.Text = "-" + Result.Text;
-                    if (Memory.Press_Btn == TypeOfButton.Operator) 
-                    {
-                        Result.Text = "-0";                        
-                    }
+                    if (Memory.Press_Btn == TypeOfButton.Operator)                   
+                        Result.Text = "-0";            
                     if (Memory.Press_Btn == TypeOfButton.Equality)
                         Memory.Clear();
                     Memory.Press_Btn = TypeOfButton.Digit;
+                    break;
+                case "%":
+                    if (Memory.Press_Btn == TypeOfButton.Equality)
+                        Memory.Var2 = "";
+                    Memory.FillMemory(Result, "%");
                     break;
                 case "AC":                    
                     Result.Text = "0";
@@ -194,30 +215,6 @@ namespace WpfCalculator
                 default:
                     break;
             }
-            /*try
-            {
-                int val = Int32.Parse(current_button);
-                if (current_result == "0")
-                {
-                    Result.Text = current_button;
-                    Memory.Var1 = val;
-                }
-                else if (current_button.Length < Result.MaxLength)
-                {
-                    Result.Text += current_button;
-                    Memory.Var1 = Memory.Var1 * 10 + val;
-
-                }
-            }
-            catch (FormatException)
-            {
-                if (current_button == "AC")
-                    Result.Text = "0";
-                Result_int = Int32.Parse(Result.Text);
-
-                MessageBox.Show(Result_int.ToString());
-            }*/
-
         }
     }
 }
